@@ -126,6 +126,12 @@ void display() {}
 
 int main(int argc, char** argv)
 {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	glutInitWindowPosition(100, 200);
+	glutCreateWindow("Line Drawing");
+
 	int choice;
 	std::cout << "Enter 1 for keyboard and 2 for mouse \n";
 	std::cin >> choice;
@@ -139,21 +145,13 @@ int main(int argc, char** argv)
 		std::cin >> x2;
 		std::cout << "Enter y2 : ";
 		std::cin >> y2;
+		glutDisplayFunc(drawLine);
+		myInit();
 	}
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	glutInitWindowPosition(100, 200);
-	glutCreateWindow("Line Drawing");
+
 	if (choice == 2)
 	{
 		glutMouseFunc(mouseFunc);
-		glutDisplayFunc(display);
-		myInit();
-	}
-	else
-	{
-		glutDisplayFunc(drawLine);
 		myInit();
 	}
 	glutMainLoop();
